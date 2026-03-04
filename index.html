@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>_</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <div class="card">
+  <div class="title-block">
+    <div class="location">埼玉</div>
+   <div class="subtitle">ATMOSPHERE</div>
+  </div>
+  
+  <h1 id="pressure"></h1>
+  <p id="level"></p>
+  <p id="diff"></p>
+  
+  <div class="status-row">
+    <span>
+      今日の気圧：
+      <span id="pressureLevelValue"></span>
+    </span>
+    <span class="separator"> / </span>
+    <span>
+      気圧差：
+      <span id="pressureAlertValue"></span>
+    </span>
+  </div>
+  
+  <div class="chart-wrapper">
+    <canvas id="miniChart"></canvas>
+  </div>
+</div>
+    <script src='https://cdn.jsdelivr.net/npm/chart.js'></script><script  src="./script.js"></script>
+
+  </body>
+  
+</html>
