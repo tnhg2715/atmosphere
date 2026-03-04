@@ -77,7 +77,7 @@ fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&d
     // --- 日付整形（今日のラベルだけ目立たせる） ---
     const formattedDates = dates.map((d, i) => {
       const dateObj = new Date(d);
-      const label = `${dateObj.getMonth() + 1}\u2009/\u2009${dateObj.getDate()}`;
+      const label = `${dateObj.getMonth() + 1}/${dateObj.getDate()}`;
       if (i === todayIndex) {
         return [label, "▴"]; // ← 配列にするだけ
       }
@@ -127,7 +127,7 @@ fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&d
               font: function(context) {
                 return {
                   weight: context.index === todayIndex ? "700" : "400",
-                  size: context.index === todayIndex ? 14 : 12
+                  size: context.index === todayIndex ? 12 : 10
                 };
               }
             },
