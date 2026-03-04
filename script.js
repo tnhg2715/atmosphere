@@ -127,7 +127,7 @@ fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&d
               font: function(context) {
                 return {
                   weight: context.index === todayIndex ? "700" : "400",
-                  size: context.index === todayIndex ? 12 : 10
+                  size: context.index === todayIndex ? 13 : 11
                 };
               }
             },
