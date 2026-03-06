@@ -32,10 +32,10 @@ fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&d
   
     let levelColor = "#2B2B2A"; // デフォルト
 
-    if (todayP >= 1015) {
+    if (todayP >= 1020) {
       levelText = "高め";
       levelColor = "#387DC9";
-    } else if (todayP <= 1005) {
+    } else if (todayP <= 1010) {
       levelText = "低め";
       levelColor = "#CF5148";
     } else {
