@@ -58,8 +58,8 @@ fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&d
     // 状態判定（前日差・3日差の絶対値を使う）
     const maxChange = Math.max(Math.abs(diffYesterday), Math.abs(diff3days));
 
-    let icon = "通常";   // デフォルト
-    let color = colors.gray; // グレー
+    let icon = "通常"; // デフォルト
+    let color = colors.gray;
 
     if (maxChange >= 12) {
       icon = "超警戒";
