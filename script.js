@@ -1,3 +1,15 @@
+const css = getComputedStyle(document.documentElement);
+const colors = {
+  base: css.getPropertyValue("--base-color"),
+  bg: css.getPropertyValue("--bg-color"),
+  gray: css.getPropertyValue("--gray"),
+  blue: css.getPropertyValue("--blue"),
+  red: css.getPropertyValue("--red"),
+  orange: css.getPropertyValue("--orange"),
+  yellow: css.getPropertyValue("--yellow"),
+  green: css.getPropertyValue("--green")
+};
+
 const lat = 35.8617;
 const lon = 139.6455;
 
@@ -30,39 +42,39 @@ fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&d
     let levelText = "";
     let levelClass = "";
   
-    let levelColor = "#2B2B2A"; // デフォルト
+    let levelColor = colors.base; // デフォルト
 
     if (todayP >= 1020) {
       levelText = "高め";
-      levelColor = "#387DC9";
+      levelColor = colors.blue;
     } else if (todayP <= 1010) {
       levelText = "低め";
-      levelColor = "#CF5148";
+      levelColor = colors.red;
     } else {
       levelText = "普通";
-      levelColor = "#7D7A75";
+      levelColor = colors.green;
     }
 
     // 状態判定（前日差・3日差の絶対値を使う）
     const maxChange = Math.max(Math.abs(diffYesterday), Math.abs(diff3days));
 
     let icon = "通常";   // デフォルト
-    let color = "#7D7A75"; // グレー
+    let color = colors.gray; // グレー
 
     if (maxChange >= 12) {
-      icon = "超警戒";   // 超警戒
-      color = "#CF5148";
+      icon = "超警戒";
+      color = colors.red;
     } else if (maxChange >= 8) {
-      icon = "警戒";   // 警戒
-      color = "#D27B2D";
+      icon = "警戒";
+      color = colors.orange;
     } else if (maxChange >= 5) {
-      icon = "注意";    // 注意
-      color = "#CB9434";
+      icon = "注意";
+      color = colors.yellow;
     }
   
     // 表示
     pressureLevelValue.textContent = levelText;
-    pressureLevelValue.style.color = levelColor; // ← 高め/普通/低め用の色
+    pressureLevelValue.style.color = levelColor; // 高め/普通/低め用の色
 
     pressureAlertValue.textContent = icon;
     pressureAlertValue.style.color = color;
@@ -79,13 +91,13 @@ fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&d
       const dateObj = new Date(d);
       const label = `${dateObj.getMonth() + 1}/${dateObj.getDate()}`;
       if (i === todayIndex) {
-        return [label, "▴"]; // ← 配列にするだけ
+        return [label, "▴"]; // 配列にする
       }
       return label;
     });
 
     const pointColors = pressures.map((_, i) =>
-      i === todayIndex ? "#2B2B2A" : "#7C7A76" // 今日だけ黒色、他は灰色
+      i === todayIndex ? colors.base : colors.gray // 今日だけ目立たせ、他は灰色
     );
     const pointSizes = pressures.map((_, i) =>
       i === todayIndex ? 4 : 3 // 今日だけ大きく
@@ -107,7 +119,7 @@ fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&d
           pointBorderColor: pointColors,
           pointBorderWidth: 0,
 
-          borderColor: "#7D7A75"  // 線の色
+          borderColor: colors.gray  // 線の色
         }]
       },
       options: {
@@ -122,7 +134,7 @@ fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&d
               autoSkip: false,
               
               color: function(context) {
-                return context.index === todayIndex ? "#2B2B2A" : "#7D7A75";
+                return context.index === todayIndex ? colors.base : colors.gray;
               },
               font: function(context) {
                 return {
@@ -133,7 +145,7 @@ fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&d
             },
             grid: {
               display: true,
-              color: "rgba(0,0,0,0.05)", // 薄い線
+              color: "rgba(0,0,0,0.1)", // 薄い線
               drawBorder: false
             }
           },
