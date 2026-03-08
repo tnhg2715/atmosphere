@@ -1,3 +1,20 @@
+:root {
+  --base-color: #2B2B2A;
+  --bg-color: #FFFFFF;
+  --gray: #7D7A75;
+  --blue: #387DC9;
+  --red: #CF5148;
+  --orange: #D27B2D;
+  --yellow: #CB9434;
+  --green: #50946E;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-color: #F0EFED;
+    --bg-color: #191919;
+  }
+}
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -6,14 +23,8 @@ body {
   align-items: center;
   font-size: 12px;
   font-family: sans-serif;
-  color: #2B2B2A;
-  background: #FFFFFF;
-}
-@media (prefers-color-scheme: dark) {
-  body {
-    color: #F0EFED;
-    background: #191919;
-  }
+  color: var(--base-color);
+  background: var(--bg-color);
 }
 
 .card {
@@ -37,9 +48,9 @@ body {
 .subtitle {
   font-size: 11px;
   letter-spacing: 0.05em;
-  weight: 400;
+  font-weight: 400;
   margin-top: -1px;
-  color: #7D7A75;
+  color: var(--gray);
 }
 
 h1 {
