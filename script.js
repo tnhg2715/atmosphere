@@ -40,21 +40,21 @@ fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&d
       levelColor = "#CF5148";
     } else {
       levelText = "普通";
-      levelColor = "#51946E";
+      levelColor = "#7D7A75";
     }
 
     // 状態判定（前日差・3日差の絶対値を使う）
     const maxChange = Math.max(Math.abs(diffYesterday), Math.abs(diff3days));
 
     let icon = "通常";   // デフォルト
-    let color = "#7C7A76"; // グレー
+    let color = "#7D7A75"; // グレー
 
     if (maxChange >= 12) {
       icon = "超警戒";   // 超警戒
       color = "#CF5148";
     } else if (maxChange >= 8) {
       icon = "警戒";   // 警戒
-      color = "#D27B2E";
+      color = "#D27B2D";
     } else if (maxChange >= 5) {
       icon = "注意";    // 注意
       color = "#CB9434";
@@ -107,7 +107,7 @@ fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&d
           pointBorderColor: pointColors,
           pointBorderWidth: 0,
 
-          borderColor: "#7C7A76"  // 線の色
+          borderColor: "#7D7A75"  // 線の色
         }]
       },
       options: {
@@ -122,7 +122,7 @@ fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&d
               autoSkip: false,
               
               color: function(context) {
-                return context.index === todayIndex ? "#2B2B2A" : "#7C7A76";
+                return context.index === todayIndex ? "#2B2B2A" : "#7D7A75";
               },
               font: function(context) {
                 return {
