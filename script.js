@@ -145,7 +145,7 @@ fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&d
             },
             grid: {
               display: true,
-              color: "rgba(0,0,0,0.1)", // 薄い線
+              color: "rgba(0,0,0,0.05)", // 薄い線
               drawBorder: false
             }
           },
