@@ -1,13 +1,25 @@
-const css = getComputedStyle(document.documentElement);
-const colors = {
-  base: css.getPropertyValue("--base-color"),
-  gray: css.getPropertyValue("--gray"),
-  blue: css.getPropertyValue("--blue"),
-  red: css.getPropertyValue("--red"),
-  orange: css.getPropertyValue("--orange"),
-  yellow: css.getPropertyValue("--yellow"),
-  green: css.getPropertyValue("--green")
-};
+let colors;
+
+function updateColors() {
+  const css = getComputedStyle(document.documentElement);
+  colors = {
+    base: css.getPropertyValue("--base-color").trim(),
+    gray: css.getPropertyValue("--gray").trim(),
+    blue: css.getPropertyValue("--blue").trim(),
+    red: css.getPropertyValue("--red").trim(),
+    orange: css.getPropertyValue("--orange").trim(),
+    yellow: css.getPropertyValue("--yellow").trim(),
+    green: css.getPropertyValue("--green").trim()
+  };
+}
+
+updateColors();
+
+const media = window.matchMedia('(prefers-color-scheme: dark)');
+media.addEventListener('change', () => {
+  updateColors();
+  redraw(); // 描画更新
+});
 
 const lat = 35.8617;
 const lon = 139.6455;
