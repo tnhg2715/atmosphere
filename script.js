@@ -1,3 +1,8 @@
+const media = window.matchMedia('(prefers-color-scheme: dark)');
+media.addEventListener('change', () => {
+  location.reload();
+});
+
 const css = getComputedStyle(document.documentElement);
 const colors = {
   base: css.getPropertyValue("--base-color"),
