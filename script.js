@@ -1,26 +1,12 @@
-function getColors() {
-  const css = getComputedStyle(document.documentElement);
-
-  return {
-    base: css.getPropertyValue("--base-color").trim(),
-    gray: css.getPropertyValue("--gray").trim(),
-    blue: css.getPropertyValue("--blue").trim(),
-    red: css.getPropertyValue("--red").trim(),
-    orange: css.getPropertyValue("--orange").trim(),
-    yellow: css.getPropertyValue("--yellow").trim(),
-    green: css.getPropertyValue("--green").trim()
-  };
-}
-
-const colors = getColors();
-
-const media = window.matchMedia("(prefers-color-scheme: dark)");
-media.addEventListener("change", () => {
-  setTimeout(() => {
-    updateColors();
-    redraw();
-  }, 50);
-});
+const css = getComputedStyle(document.documentElement);
+const colors = {
+  gray: css.getPropertyValue("--gray"),
+  blue: css.getPropertyValue("--blue"),
+  red: css.getPropertyValue("--red"),
+  orange: css.getPropertyValue("--orange"),
+  yellow: css.getPropertyValue("--yellow"),
+  green: css.getPropertyValue("--green")
+};
 
 const lat = 35.8617;
 const lon = 139.6455;
@@ -54,7 +40,7 @@ fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&d
     let levelText = "";
     let levelClass = "";
   
-    let levelColor = colors.base; // デフォルト
+    let levelColor = colors.gray; // デフォルト
 
     if (todayP >= 1020) {
       levelText = "高め";
@@ -109,7 +95,7 @@ fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&d
     });
 
     const pointColors = pressures.map((_, i) =>
-      i === todayIndex ? colors.base : colors.gray // 今日だけ色変え
+      i === todayIndex ? colors.red : colors.gray // 今日だけ色変え
     );
     const pointSizes = pressures.map((_, i) =>
       i === todayIndex ? 4 : 3 // 今日だけ大きく
@@ -146,7 +132,7 @@ fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&d
               autoSkip: false,
               
               color: function(context) {
-                return context.index === todayIndex ? colors.base : colors.gray;
+                return context.index === todayIndex ? colors.red : colors.gray;
               },
               font: function(context) {
                 return {
@@ -157,7 +143,7 @@ fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&d
             },
             grid: {
               display: true,
-              color: "rgba(0,0,0,0.05)", // 薄い縦線
+              color: "rgba(125,122,117,0.1)", // 薄い縦線
               drawBorder: false
             }
           },
