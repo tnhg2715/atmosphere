@@ -1,6 +1,5 @@
 :root {
   --base-color: #2B2B2A;
-  --bg-color: #FFFFFF;
   --gray: #7D7A75;
   --blue: #387DC9;
   --red: #CF5148;
@@ -11,7 +10,6 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --text-color: #F0EFED;
-    --bg-color: #191919;
   }
 }
 
@@ -24,7 +22,7 @@ body {
   font-size: 12px;
   font-family: sans-serif;
   color: var(--base-color);
-  background: var(--bg-color);
+  background: transparent;
 }
 
 .card {
