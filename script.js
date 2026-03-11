@@ -1,8 +1,7 @@
-let colors;
-
-function updateColors() {
+function getColors() {
   const css = getComputedStyle(document.documentElement);
-  colors = {
+
+  return {
     base: css.getPropertyValue("--base-color").trim(),
     gray: css.getPropertyValue("--gray").trim(),
     blue: css.getPropertyValue("--blue").trim(),
@@ -13,12 +12,14 @@ function updateColors() {
   };
 }
 
-updateColors();
+const colors = getColors();
 
-const media = window.matchMedia('(prefers-color-scheme: dark)');
-media.addEventListener('change', () => {
-  updateColors();
-  redraw(); // 描画更新
+const media = window.matchMedia("(prefers-color-scheme: dark)");
+media.addEventListener("change", () => {
+  setTimeout(() => {
+    updateColors();
+    redraw();
+  }, 50);
 });
 
 const lat = 35.8617;
