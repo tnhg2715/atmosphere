@@ -143,8 +143,11 @@ fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&d
             },
             grid: {
               display: true,
-              color: "rgba(125,122,117,0.1)", // 薄い縦線
+              color: "rgba(125,122,117,0.15)", // 縦線
               drawBorder: false
+            },
+            border: {
+              color: "rgba(125,122,117,0.3)", // 下線
             }
           },
           y: { display: false }
