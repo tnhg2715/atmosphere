@@ -1,7 +1,6 @@
 const css = getComputedStyle(document.documentElement);
 const colors = {
   base: css.getPropertyValue("--base-color"),
-  bg: css.getPropertyValue("--bg-color"),
   gray: css.getPropertyValue("--gray"),
   blue: css.getPropertyValue("--blue"),
   red: css.getPropertyValue("--red"),
@@ -97,7 +96,7 @@ fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&d
     });
 
     const pointColors = pressures.map((_, i) =>
-      i === todayIndex ? colors.base : colors.gray // 今日だけ目立たせ、他は灰色
+      i === todayIndex ? colors.base : colors.gray // 今日だけ色変え
     );
     const pointSizes = pressures.map((_, i) =>
       i === todayIndex ? 4 : 3 // 今日だけ大きく
@@ -145,7 +144,7 @@ fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&d
             },
             grid: {
               display: true,
-              color: "rgba(0,0,0,0.05)", // 薄い線
+              color: "rgba(0,0,0,0.05)", // 薄い縦線
               drawBorder: false
             }
           },
