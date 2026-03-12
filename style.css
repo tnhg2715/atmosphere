@@ -1,16 +1,16 @@
 :root {
-  --base-color: #2B2B2A;
-  --bg-color: #FFFFFF;
-  --gray: #7D7A75;
-  --blue: #387DC9;
-  --red: #CF5148;
-  --orange: #D27B2D;
-  --yellow: #CB9434;
-  --green: #50946E;
+  --base-color: #2b2b2a;
+  --bg-color: #ffffff;
+  --gray: #7d7a75;
+  --blue: #387dc9;
+  --red: #cf5148;
+  --orange: #d27b2d;
+  --yellow: #cb9434;
+  --green: #50946e;
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --base-color: #F0EFED;
+    --base-color: #f0efed;
     --bg-color: #191919;
   }
 }
