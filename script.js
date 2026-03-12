@@ -94,14 +94,41 @@ fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&d
       return label;
     });
 
-    const pointColors = pressures.map((_, i) =>
-      i === todayIndex ? colors.red : colors.gray // 今日だけ色変え
-    );
+    const pointColors = colors.gray;
     const pointSizes = pressures.map((_, i) =>
-      i === todayIndex ? 4 : 3 // 今日だけ大きく
+      i === todayIndex ? 4 : 2 // 今日だけ大きく
     );
 
     // --- ミニマルグラフ ---
+    // 波紋設定
+    const ripplePlugin = {
+    id: "todayRipple",
+    afterDatasetsDraw(chart) {
+      const { ctx } = chart;
+      const meta = chart.getDatasetMeta(0);
+
+      const point = meta.data[3]; // todayIndex と同じ
+      if (!point) return;
+
+      const { x, y } = point.getProps(["x", "y"], true);
+
+      const time = Date.now() / 2800;
+      const radius = 4 + (time % 1) * 16;
+      const opacity = 0.8 - (radius / 16);
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(125,122,117,${Math.max(opacity,0)})`;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.restore();
+
+      requestAnimationFrame(() => chart.draw());
+      }
+    };
+  
+    //グラフ描画
     new Chart(document.getElementById("miniChart"), {
       type: "line",
       data: {
@@ -131,9 +158,7 @@ fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&d
               minRotation: 0,
               autoSkip: false,
               
-              color: function(context) {
-                return context.index === todayIndex ? colors.red : colors.gray;
-              },
+              color: colors.gray,
               font: function(context) {
                 return {
                   weight: context.index === todayIndex ? "700" : "400",
@@ -152,7 +177,8 @@ fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&d
           },
           y: { display: false }
         }
-      }
+      },
+      plugins: [ripplePlugin]
     });
   })
   .catch(err => {
