@@ -94,7 +94,6 @@ fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&d
       return label;
     });
 
-    const pointColors = colors.gray;
     const pointSizes = pressures.map((_, i) =>
       i === todayIndex ? 4 : 2 // 今日だけ大きく
     );
@@ -140,8 +139,8 @@ fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&d
           fill: false,
 
           pointRadius: pointSizes,
-          pointBackgroundColor: pointColors,
-          pointBorderColor: pointColors,
+          pointBackgroundColor: colors.gray,
+          pointBorderColor: colors.gray,
           pointBorderWidth: 0,
 
           borderColor: colors.gray  // 線の色
